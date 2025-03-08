@@ -1,0 +1,29 @@
+<mat-card class="editor-container" appearance="outlined">
+  <div class="editor">
+    <mat-card-title>Write Your Draft</mat-card-title>
+
+    <quill-editor
+      #editor
+      (onContentChanged)="onContentChanged($event)"
+      [styles]="{ height: '300px' }"
+    >
+    </quill-editor>
+
+    <div class="button-group">
+      <button mat-raised-button color="primary" (click)="saveDraft()">
+        Save Draft
+      </button>
+      <button mat-raised-button color="accent" (click)="analyzeText()">
+        Analyze
+      </button>
+    </div>
+  </div>
+
+  <div class="analysis">
+    <mat-card-title>AI-Powered Writing Analysis</mat-card-title>
+    <mat-card-content *ngIf="aiResponse">
+      <h3>Analysis Result:</h3>
+      <p>{{ aiResponse }}</p>
+    </mat-card-content>
+  </div>
+</mat-card>

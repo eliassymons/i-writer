@@ -5,24 +5,25 @@ html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
 body.dark-mode {
   background-color: #121212;
   color: white;
-  mat-toolbar {
-    background: #1e1e1e;
-    color: white;
-  }
-  mat-card {
-    background: #1e1e1e;
-    color: white;
-  }
-
-  .ql-container {
-    background: #333;
-    color: white;
-  }
+}
+body.dark-mode mat-toolbar {
+  background: #1e1e1e;
+  color: white;
+}
+body.dark-mode mat-card {
+  background: #1e1e1e;
+  color: white;
+}
+body.dark-mode .ql-container {
+  background: #333;
+  color: white;
 }
