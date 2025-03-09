@@ -12,7 +12,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  generateAIResponse(prompt: string): Observable<any> {
+  generateAIResponse(selectedText: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${this.API_KEY}`,
@@ -23,17 +23,15 @@ export class ApiService {
       messages: [
         {
           role: 'user',
-          content: `Analyze this text and return JSON structured feedback. Identify specific phrases that could be improved and provide better alternatives.
-          Format response as:
+          content: `Analyze this short phrase and suggest improvements. Return only JSON in this format:
           {
             "suggestions": [
-              { "original": "original phrase", "suggestion": "improved phrase", "start": index, "end": index }
+              { "original": "${selectedText}", "suggestion": "improved phrase" }
             ]
-          }
-          Here is the text: ${prompt}`,
+          }`,
         },
       ],
-      max_tokens: 300,
+      max_tokens: 100,
     };
 
     return this.http.post(this.OPENAI_API_URL, body, { headers });

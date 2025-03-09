@@ -1,9 +1,21 @@
-.spacer {
-  flex: 1;
-}
-
 .container {
   padding: 20px;
   max-width: 900px;
   margin: auto;
+}
+
+mat-toolbar {
+  display: flex;
+  justify-content: center;
+}
+mat-toolbar .toolbar-content {
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  justify-content: space-between;
+}
+mat-toolbar .nav-btn-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }

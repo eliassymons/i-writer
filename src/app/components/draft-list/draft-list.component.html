@@ -1,0 +1,23 @@
+<mat-card class="draft-list-container">
+  <mat-card-title>Saved Drafts</mat-card-title>
+  @if (!!drafts().length) {
+  <mat-list>
+    <mat-list-item *ngFor="let draft of drafts(); let i = index">
+      <span (click)="editDraft(draft.id!)">{{ draft.title }}</span>
+      <button mat-icon-button color="warn" (click)="deleteDraft(draft.id!)">
+        🗑
+      </button>
+    </mat-list-item>
+  </mat-list>
+  } @else {
+  <ng-container *ngTemplateOutlet="noDrafts"></ng-container>
+  }
+
+  <ng-template #noDrafts>
+    <p>No drafts found.</p>
+  </ng-template>
+
+  <button mat-raised-button color="primary" (click)="newDraft()">
+    New Draft
+  </button>
+</mat-card>

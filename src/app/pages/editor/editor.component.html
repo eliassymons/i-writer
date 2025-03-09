@@ -1,29 +1,66 @@
 <mat-card class="editor-container" appearance="outlined">
   <div class="editor">
-    <mat-card-title>Write Your Draft</mat-card-title>
+    <div class="title-container">
+      <div class="editor-title">
+        <mat-card-title class="editor-title">{{ draftTitle() }}</mat-card-title
+        ><mat-icon>edit</mat-icon>
+      </div>
+      <button mat-stroked-button color="accent" (click)="backToDrafts()">
+        ← Back to Drafts
+      </button>
+    </div>
 
     <quill-editor
+      [modules]="quillConfig"
       #editor
       (onContentChanged)="onContentChanged($event)"
-      [styles]="{ height: '300px' }"
+      (onSelectionChanged)="onSelectionChanged($event)"
+      [styles]="{ height: '300px', width: '100%' }"
     >
     </quill-editor>
 
     <div class="button-group">
-      <button mat-raised-button color="primary" (click)="saveDraft()">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="analyzeSelectedText()"
+        [disabled]="!selectedText"
+      >
+        Analyze
+      </button>
+      <!-- Save & Load Drafts -->
+      <button mat-stroked-button color="accent" (click)="saveCurrentDraft()">
         Save Draft
       </button>
-      <button mat-raised-button color="accent" (click)="analyzeText()">
-        Analyze
+      <button mat-stroked-button color="warn" (click)="loadDrafts()">
+        Load Drafts
       </button>
     </div>
   </div>
 
-  <div class="analysis">
-    <mat-card-title>AI-Powered Writing Analysis</mat-card-title>
-    <mat-card-content *ngIf="aiResponse">
-      <h3>Analysis Result:</h3>
-      <p>{{ aiResponse }}</p>
-    </mat-card-content>
+  <div class="suggestions-sidebar">
+    @if (loading()) {
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <p>Analyzing...</p>
+    }@else { @if (!selectedText()) {
+    <div class="hint">
+      <mat-icon>support_agent</mat-icon>
+      <p>Highlight a section of text for instant suggestions!</p>
+    </div>
+
+    } @if (selectedText()) {
+
+    <p><strong>Selection:</strong> {{ selectedText() }}</p>
+
+    } @if (currentSuggestion()){
+
+    <p><strong>Suggestion:</strong> {{ currentSuggestion()?.suggestion }}</p>
+    <button mat-flat-button color="primary" (click)="acceptSuggestion()">
+      Accept
+    </button>
+    <button mat-stroked-button color="warn" (click)="declineSuggestion()">
+      Decline
+    </button>
+    } }
   </div>
 </mat-card>

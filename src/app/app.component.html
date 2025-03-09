@@ -1,11 +1,18 @@
 <mat-toolbar>
-  <span>Writing Assistant</span>
-  <span class="spacer"></span>
-  <button mat-button routerLink="/editor">Editor</button>
-  <button mat-button routerLink="/analysis">Analysis</button>
-  <button mat-button routerLink="/settings">Settings</button>
+  <div class="toolbar-content">
+    <p>Writing Assistant</p>
+    <div class="nav-btn-wrapper">
+      <button class="nav-btn" mat-button routerLink="/editor">Editor</button>
+      <button class="nav-btn" mat-button routerLink="/analysis">
+        Analysis
+      </button>
+      <button class="nav-btn" mat-button routerLink="/settings">
+        Settings
+      </button>
 
-  <mat-slide-toggle (change)="toggleDarkMode()">Dark Mode</mat-slide-toggle>
+      <mat-slide-toggle (change)="toggleDarkMode()">Dark Mode</mat-slide-toggle>
+    </div>
+  </div>
 </mat-toolbar>
 
 <div class="container">

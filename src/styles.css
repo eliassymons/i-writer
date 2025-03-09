@@ -13,17 +13,20 @@ body {
 
 body.dark-mode {
   background-color: #121212;
-  color: white;
+  color: #c5c5c5;
 }
 body.dark-mode mat-toolbar {
-  background: #1e1e1e;
-  color: white;
+  background: #1e1e1e !important;
+  color: #c5c5c5;
+}
+body.dark-mode mat-toolbar .nav-btn {
+  background-color: #c5c5c5;
 }
 body.dark-mode mat-card {
   background: #1e1e1e;
-  color: white;
+  color: #c5c5c5;
 }
 body.dark-mode .ql-container {
   background: #333;
-  color: white;
+  color: #c5c5c5;
 }

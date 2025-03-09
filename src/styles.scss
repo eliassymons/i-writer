@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "quill/dist/quill.core.css";
 @import "quill/dist/quill.snow.css";
+
+$off-white: #c5c5c5;
 html,
 body {
   height: 100%;
@@ -11,18 +13,22 @@ body {
 }
 body.dark-mode {
   background-color: #121212;
-  color: white;
+  color: $off-white;
+
   mat-toolbar {
-    background: #1e1e1e;
-    color: white;
+    background: #1e1e1e !important;
+    color: $off-white;
+    .nav-btn {
+      background-color: $off-white;
+    }
   }
   mat-card {
     background: #1e1e1e;
-    color: white;
+    color: $off-white;
   }
 
   .ql-container {
     background: #333;
-    color: white;
+    color: $off-white;
   }
 }
