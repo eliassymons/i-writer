@@ -1,4 +1,11 @@
-import { Component, computed, inject, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { QuillEditorComponent, QuillModule } from 'ngx-quill';
 import { CommonModule } from '@angular/common';
@@ -13,6 +20,9 @@ import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { TitleDialogComponent } from '../../components/title-dialog/title-dialog.component';
 import { EditTitleComponent } from '../../components/edit-title/edit-title.component';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { DownloadService } from '../../services/download.service';
 
 interface ISuggestion {
   original: string;
@@ -54,6 +64,7 @@ interface RangeSelection {
 export class EditorComponent {
   private apiService = inject(ApiService);
   private draftService = inject(DraftService);
+  private downloadService = inject(DownloadService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialog = inject(MatDialog);
@@ -66,6 +77,8 @@ export class EditorComponent {
   private draftId = this.draftService.draftId;
   public currDraft = this.draftService.currentDraft;
 
+  public dirty = signal<boolean>(false);
+  public editorDisabled = signal<boolean>(false);
   private selectedRange = signal<RangeSelection | null>(null);
   public selectedText = signal<string | null>(null);
   public currentSuggestion = signal<ISuggestion | null>(null);
@@ -89,9 +102,14 @@ export class EditorComponent {
       const validId = this.draftId();
       if (validId) this.loadDraft(validId);
     });
+
+    effect(() => {
+      console.log(this.editor());
+    });
   }
 
   public onContentChanged(event: any) {
+    this.dirty.set(true);
     this.editorContent.set(event.html); // Gets the full HTML content
   }
   // Detect selection changes in the editor
@@ -116,7 +134,7 @@ export class EditorComponent {
   // Send only the selected text for analysis
   public analyzeSelectedText() {
     if (!this.selectedText() || !this.selectedRange()) return;
-
+    this.editorDisabled.set(true);
     this.loading.set(true); // Show loading spinner
 
     this.apiService.generateAIResponse(this.selectedText()!).subscribe({
@@ -173,16 +191,19 @@ export class EditorComponent {
     }, 2000);
 
     // Reset selection state
-    this.selectedText.set(null);
-    this.currentSuggestion.set(null);
-    this.selectedRange.set(null);
+    this.resetEditor();
   }
 
   // Decline the suggestion (just clears the UI)
   public declineSuggestion() {
+    this.resetEditor();
+  }
+
+  public resetEditor(): void {
     this.selectedText.set(null);
     this.currentSuggestion.set(null);
     this.selectedRange.set(null);
+    this.editorDisabled.set(false);
   }
   // Save Current Draft
 
@@ -254,10 +275,17 @@ export class EditorComponent {
   }
 
   updateTitle(title: string): void {
-    console.log(title);
+    this.dirty.set(true);
     const id = this.draftId() ?? '';
     this.draftService.editDraftTitle(id, title);
     console.log('here');
     this.titleEditOpen.set(false);
+  }
+
+  exportToPDF(): void {
+    this.downloadService.exportToPDF(
+      this.editor()!,
+      this.currDraft()?.title ?? 'Draft'
+    );
   }
 }

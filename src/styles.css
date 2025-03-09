@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "quill/dist/quill.core.css";
 @import "quill/dist/quill.snow.css";
+:root {
+  --grey-text: #808080;
+}
+
 html,
 body {
   height: 100%;
@@ -29,4 +33,13 @@ body.dark-mode mat-card {
 body.dark-mode .ql-container {
   background: #333;
   color: #c5c5c5;
+}
+
+.mat-mdc-extended-fab {
+  --mdc-extended-fab-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-hover-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-focus-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-pressed-container-elevation-shadow: 0 0 0 0 unset;
+  height: 40px !important;
+  border-radius: 2rem !important;
 }

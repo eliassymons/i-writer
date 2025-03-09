@@ -3,6 +3,11 @@
 @import "quill/dist/quill.snow.css";
 
 $off-white: #c5c5c5;
+
+:root {
+  --grey-text: #808080; // Optional: CSS variable for flexibility
+}
+
 html,
 body {
   height: 100%;
@@ -31,4 +36,13 @@ body.dark-mode {
     background: #333;
     color: $off-white;
   }
+}
+
+.mat-mdc-extended-fab {
+  --mdc-extended-fab-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-hover-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-focus-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-pressed-container-elevation-shadow: 0 0 0 0 unset;
+  height: 40px !important;
+  border-radius: 2rem !important;
 }

@@ -13,7 +13,12 @@ mat-toolbar {
     max-width: 900px;
     justify-content: space-between;
   }
-
+  .title-btn {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
   .nav-btn-wrapper {
     display: flex;
     gap: 1rem;

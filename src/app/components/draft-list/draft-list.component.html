@@ -1,4 +1,4 @@
-<mat-card class="draft-list-container">
+<mat-card class="draft-list-container" appearance="outlined">
   <mat-card-header>
     <mat-card-title>Saved Drafts</mat-card-title>
   </mat-card-header>
@@ -32,11 +32,23 @@
     }
 
     <ng-template #noDrafts>
-      <img src="assets/images/empty-icon.svg" class="icon-svg" />
+      <div class="empty-box">
+        <div class="subtitle">
+          <p>You haven't saved any drafts.</p>
+          <mat-icon>sentiment_dissatisfied</mat-icon>
+        </div>
+        <img src="assets/images/empty-icon.svg" class="icon-svg" />
+      </div>
     </ng-template>
 
-    <button mat-flat-button color="primary" (click)="newDraft()">
-      New Draft
+    <button
+      class="new-draft-btn"
+      mat-fab
+      extended
+      color="accent"
+      (click)="newDraft()"
+    >
+      New Draft<mat-icon>add</mat-icon>
     </button>
   </mat-card-content>
 </mat-card>

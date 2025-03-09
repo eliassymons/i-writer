@@ -33,3 +33,20 @@
   flex-shrink: 0;
   margin-left: 10px;
 }
+.draft-list-container .empty-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.draft-list-container .empty-box mat-icon {
+  color: var(--grey-text);
+  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+}
+.draft-list-container .empty-box .subtitle {
+  display: flex;
+  color: var(--grey-text);
+  align-items: center;
+}

@@ -3,9 +3,13 @@
     <mat-card-header class="title-container">
       <div class="editor-title">
         @if (!titleEditOpen()) {
+
         <mat-card-title class="editor-title">{{
           currDraft()?.title ?? "New Draft"
         }}</mat-card-title>
+        <button (click)="titleEditOpen.set(true)" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
         }@else {
         <app-edit-title
           [initialTitle]="currDraft()?.title || 'Untitled Draft'"
@@ -15,26 +19,31 @@
         </app-edit-title>
 
         }
-        <button (click)="titleEditOpen.set(true)" mat-icon-button>
-          <mat-icon>edit</mat-icon>
+      </div>
+      <div class="button-group">
+        <button
+          [disabled]="!editorContent()"
+          mat-stroked-button
+          color="primary"
+          (click)="exportToPDF()"
+        >
+          Download PDF
+        </button>
+        <button
+          class="back-btn"
+          mat-fab
+          extended
+          color="accent"
+          (click)="backToDrafts()"
+        >
+          <mat-icon>arrow_back</mat-icon> Back to Drafts
         </button>
       </div>
-      <button
-        class="back-btn"
-        mat-fab
-        extended
-        color="accent"
-        (click)="backToDrafts()"
-      >
-        <mat-icon>arrow_back</mat-icon> Back to Drafts
-      </button>
     </mat-card-header>
 
     <mat-card-content>
-      @for (draft of drafts(); track $index) {
-      <p>{{ draft.title }}</p>
-      }
       <quill-editor
+        [readOnly]="editorDisabled()"
         [modules]="quillConfig"
         #editor
         (onContentChanged)="onContentChanged($event)"
@@ -48,44 +57,54 @@
           mat-flat-button
           color="primary"
           (click)="analyzeSelectedText()"
-          [disabled]="!selectedText"
+          [disabled]="!selectedText() || editorDisabled()"
         >
           Analyze
         </button>
         <!-- Save & Load Drafts -->
-        <button mat-stroked-button color="accent" (click)="saveCurrentDraft()">
+        <button
+          [disabled]="!dirty() || editorDisabled()"
+          mat-stroked-button
+          color="accent"
+          (click)="saveCurrentDraft()"
+        >
           Save Draft
-        </button>
-        <button mat-stroked-button color="warn" (click)="loadDrafts()">
-          Load Drafts
         </button>
       </div>
     </mat-card-content>
   </div>
 
-  <div class="suggestions-sidebar">
-    @if (loading()) {
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-    <p>Analyzing...</p>
-    }@else { @if (!selectedText()) {
-    <div class="hint">
-      <mat-icon>support_agent</mat-icon>
-      <p>Highlight a section of text for instant suggestions!</p>
-    </div>
+  <mat-card-footer class="suggestions-sidebar">
+    <mat-card-content class="footer-content">
+      @if (loading()) {
+      <div class="loading-display">
+        <div class="img-container">
+          <img src="assets/images/thinking.svg" class="icon-svg pulse" />
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+        </div>
+        <p>Analyzing...</p>
+      </div>
 
-    } @if (selectedText()) {
+      }@else { @if (!currentSuggestion()) {
 
-    <p><strong>Selection:</strong> {{ selectedText() }}</p>
+      <div class="hint">
+        <p>Highlight a section of text for instant suggestions!</p>
+        <img src="assets/images/message.svg" class="icon-svg" />
+      </div>
 
-    } @if (currentSuggestion()){
+      } @else if(!!currentSuggestion()){
+      <p><strong>Original:</strong> {{ selectedText() }}</p>
 
-    <p><strong>Suggestion:</strong> {{ currentSuggestion()?.suggestion }}</p>
-    <button mat-flat-button color="primary" (click)="acceptSuggestion()">
-      Accept
-    </button>
-    <button mat-stroked-button color="warn" (click)="declineSuggestion()">
-      Decline
-    </button>
-    } }
-  </div>
+      <p><strong>Suggestion:</strong> {{ currentSuggestion()?.suggestion }}</p>
+      <div class="button-group">
+        <button mat-flat-button color="primary" (click)="acceptSuggestion()">
+          Accept
+        </button>
+        <button mat-stroked-button color="warn" (click)="declineSuggestion()">
+          Decline
+        </button>
+      </div>
+      } }
+    </mat-card-content>
+  </mat-card-footer>
 </mat-card>
