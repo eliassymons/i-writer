@@ -1,41 +1,66 @@
 <mat-card class="editor-container" appearance="outlined">
   <div class="editor">
-    <div class="title-container">
+    <mat-card-header class="title-container">
       <div class="editor-title">
-        <mat-card-title class="editor-title">{{ draftTitle() }}</mat-card-title
-        ><mat-icon>edit</mat-icon>
+        @if (!titleEditOpen()) {
+        <mat-card-title class="editor-title">{{
+          currDraft()?.title ?? "New Draft"
+        }}</mat-card-title>
+        }@else {
+        <app-edit-title
+          [initialTitle]="currDraft()?.title || 'Untitled Draft'"
+          (titleSaved)="updateTitle($event)"
+          (cancelEdit)="titleEditOpen.set(false)"
+        >
+        </app-edit-title>
+
+        }
+        <button (click)="titleEditOpen.set(true)" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
       </div>
-      <button mat-stroked-button color="accent" (click)="backToDrafts()">
-        ← Back to Drafts
-      </button>
-    </div>
-
-    <quill-editor
-      [modules]="quillConfig"
-      #editor
-      (onContentChanged)="onContentChanged($event)"
-      (onSelectionChanged)="onSelectionChanged($event)"
-      [styles]="{ height: '300px', width: '100%' }"
-    >
-    </quill-editor>
-
-    <div class="button-group">
       <button
-        mat-flat-button
-        color="primary"
-        (click)="analyzeSelectedText()"
-        [disabled]="!selectedText"
+        class="back-btn"
+        mat-fab
+        extended
+        color="accent"
+        (click)="backToDrafts()"
       >
-        Analyze
+        <mat-icon>arrow_back</mat-icon> Back to Drafts
       </button>
-      <!-- Save & Load Drafts -->
-      <button mat-stroked-button color="accent" (click)="saveCurrentDraft()">
-        Save Draft
-      </button>
-      <button mat-stroked-button color="warn" (click)="loadDrafts()">
-        Load Drafts
-      </button>
-    </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      @for (draft of drafts(); track $index) {
+      <p>{{ draft.title }}</p>
+      }
+      <quill-editor
+        [modules]="quillConfig"
+        #editor
+        (onContentChanged)="onContentChanged($event)"
+        (onSelectionChanged)="onSelectionChanged($event)"
+        [styles]="{ height: '300px', width: '100%' }"
+      >
+      </quill-editor>
+
+      <div class="button-group">
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="analyzeSelectedText()"
+          [disabled]="!selectedText"
+        >
+          Analyze
+        </button>
+        <!-- Save & Load Drafts -->
+        <button mat-stroked-button color="accent" (click)="saveCurrentDraft()">
+          Save Draft
+        </button>
+        <button mat-stroked-button color="warn" (click)="loadDrafts()">
+          Load Drafts
+        </button>
+      </div>
+    </mat-card-content>
   </div>
 
   <div class="suggestions-sidebar">

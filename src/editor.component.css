@@ -1,7 +1,6 @@
 .editor-container {
   display: flex;
   gap: 20px;
-  padding: 20px;
 }
 
 .editor {
@@ -11,12 +10,17 @@
   flex: 1;
   width: 100%;
   max-width: 100%;
+  margin-bottom: 1rem;
+}
+.editor quill-editor ::ng-deep .ql-container {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.editor quill-editor ::ng-deep .ql-toolbar {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 .editor .title-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
   margin-bottom: 1rem;
 }
 .editor .title-container .editor-title {
@@ -24,6 +28,9 @@
   align-items: center;
   gap: 1rem;
   font-weight: bold;
+}
+.editor .title-container .back-btn {
+  margin-left: auto;
 }
 
 .suggestions-sidebar {
@@ -44,4 +51,13 @@
   margin-top: 10px;
   display: flex;
   gap: 10px;
+}
+
+.mat-mdc-extended-fab {
+  --mdc-extended-fab-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-hover-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-focus-container-elevation-shadow: 0 0 0 0 unset;
+  --mdc-extended-fab-pressed-container-elevation-shadow: 0 0 0 0 unset;
+  height: unset;
+  border-radius: 2rem;
 }

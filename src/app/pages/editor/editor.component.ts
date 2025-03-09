@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { TitleDialogComponent } from '../../components/title-dialog/title-dialog.component';
+import { EditTitleComponent } from '../../components/edit-title/edit-title.component';
 
 interface ISuggestion {
   original: string;
@@ -44,6 +45,7 @@ interface RangeSelection {
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    EditTitleComponent,
     MatIconModule,
   ],
   templateUrl: './editor.component.html',
@@ -55,18 +57,14 @@ export class EditorComponent {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dialog = inject(MatDialog);
-
+  public drafts = this.draftService.drafts;
   public editor = viewChild<QuillEditorComponent>('editor');
 
   public editorContent = signal<string>('');
-  private suggestions = signal<ISuggestion[]>([]);
+  public titleEditOpen = signal<boolean>(false);
+
   private draftId = this.draftService.draftId;
-  public draftTitle = computed(() => {
-    return (
-      this.draftService.drafts().find((d) => d.id === this.draftId())?.title ??
-      'New Draft'
-    );
-  });
+  public currDraft = this.draftService.currentDraft;
 
   private selectedRange = signal<RangeSelection | null>(null);
   public selectedText = signal<string | null>(null);
@@ -85,6 +83,7 @@ export class EditorComponent {
   };
 
   constructor() {
+    this.loadDrafts();
     this.route.paramMap.subscribe((params) => {
       this.draftId.set(params.get('id'));
       const validId = this.draftId();
@@ -188,15 +187,31 @@ export class EditorComponent {
   // Save Current Draft
 
   saveCurrentDraft() {
-    const dialogRef = this.dialog.open(TitleDialogComponent, {
-      data: { title: 'Untitled Draft' },
-    });
+    const id = this.draftId();
+    const title = this.currDraft()?.title ?? '';
+    const content = this.editorContent();
 
-    dialogRef.afterClosed().subscribe((title) => {
-      if (title) {
-        this.draftService.saveDraft(title, this.editorContent());
+    if (!title) {
+      const dialogRef = this.dialog.open(TitleDialogComponent, {
+        data: { title: 'Untitled Draft' },
+      });
+
+      dialogRef.afterClosed().subscribe((newTitle) => {
+        if (newTitle) {
+          if (id) {
+            this.draftService.updateDraft(id, newTitle, content);
+          } else {
+            this.draftService.saveDraft(newTitle, content);
+          }
+        }
+      });
+    } else {
+      if (id) {
+        this.draftService.updateDraft(id, title, content);
+      } else {
+        this.draftService.saveDraft(title, content);
       }
-    });
+    }
   }
 
   // Load All Drafts
@@ -222,7 +237,7 @@ export class EditorComponent {
   }
 
   // Delete a Draft
-  // Open Confirmation Dialog for Deleting a Draft
+
   deleteDraft(draftId: string) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
@@ -236,5 +251,13 @@ export class EditorComponent {
         this.draftService.deleteDraft(draftId);
       }
     });
+  }
+
+  updateTitle(title: string): void {
+    console.log(title);
+    const id = this.draftId() ?? '';
+    this.draftService.editDraftTitle(id, title);
+    console.log('here');
+    this.titleEditOpen.set(false);
   }
 }

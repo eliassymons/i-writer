@@ -5,6 +5,9 @@ import { DraftService } from '../../services/draft.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatIconModule } from '@angular/material/icon';
 
 interface Draft {
   id?: string;
@@ -16,13 +19,20 @@ interface Draft {
 @Component({
   selector: 'app-draft-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatListModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    MatListModule,
+    MatIconModule,
+  ],
   templateUrl: './draft-list.component.html',
   styleUrls: ['./draft-list.component.scss'],
 })
 export class DraftListComponent {
   private draftService = inject(DraftService);
   private router = inject(Router);
+  private dialog = inject(MatDialog);
 
   public drafts = this.draftService.drafts;
 
@@ -47,8 +57,17 @@ export class DraftListComponent {
 
   // Delete a draft
   deleteDraft(draftId: string) {
-    if (!confirm('Are you sure you want to delete this draft?')) return;
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete Draft',
+        message: 'Are you sure you want to delete this draft?',
+      },
+    });
 
-    this.draftService.deleteDraft(draftId);
+    dialogRef.afterClosed().subscribe((confirmed) => {
+      if (confirmed) {
+        this.draftService.deleteDraft(draftId);
+      }
+    });
   }
 }

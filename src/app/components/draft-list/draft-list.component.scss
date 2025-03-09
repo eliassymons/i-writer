@@ -1,0 +1,42 @@
+.draft-list-container {
+  mat-card-title {
+    font-weight: 500;
+  }
+  mat-list-item {
+    display: flex; // Ensures horizontal layout
+    align-items: center; // Centers items vertically
+    justify-content: space-between; // Ensures the title and button are spaced apart
+    cursor: pointer !important;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 4px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:active {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis; // Truncates long titles with "..."
+    white-space: nowrap; // Keeps text on one line
+  }
+  .date {
+    font-size: 12px;
+  }
+
+  .delete-button {
+    position: absolute;
+
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-shrink: 0; // Prevents button from resizing
+    margin-left: 10px; // Adds space between title and delete button
+  }
+}

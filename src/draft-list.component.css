@@ -1,0 +1,35 @@
+.draft-list-container mat-card-title {
+  font-weight: 500;
+}
+.draft-list-container mat-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 4px;
+}
+.draft-list-container mat-list-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.draft-list-container mat-list-item:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.draft-list-container .title {
+  font-weight: 500;
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.draft-list-container .date {
+  font-size: 12px;
+}
+.draft-list-container .delete-button {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-shrink: 0;
+  margin-left: 10px;
+}

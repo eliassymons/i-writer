@@ -1,23 +1,42 @@
 <mat-card class="draft-list-container">
-  <mat-card-title>Saved Drafts</mat-card-title>
-  @if (!!drafts().length) {
-  <mat-list>
-    <mat-list-item *ngFor="let draft of drafts(); let i = index">
-      <span (click)="editDraft(draft.id!)">{{ draft.title }}</span>
-      <button mat-icon-button color="warn" (click)="deleteDraft(draft.id!)">
-        🗑
-      </button>
-    </mat-list-item>
-  </mat-list>
-  } @else {
-  <ng-container *ngTemplateOutlet="noDrafts"></ng-container>
-  }
+  <mat-card-header>
+    <mat-card-title>Saved Drafts</mat-card-title>
+  </mat-card-header>
 
-  <ng-template #noDrafts>
-    <p>No drafts found.</p>
-  </ng-template>
+  <mat-card-content>
+    @if (!!drafts().length) {
+    <mat-list>
+      <mat-list-item
+        *ngFor="let draft of drafts(); let i = index"
+        class="clickable"
+        (click)="editDraft(draft.id!)"
+      >
+        <!-- Title that takes full width -->
+        <span class="title" matRipple>{{ draft.title }}</span
+        >{{ " "
+        }}<span class="date" matListItemLine>{{ draft.timestamp | date }}</span>
 
-  <button mat-raised-button color="primary" (click)="newDraft()">
-    New Draft
-  </button>
+        <!-- Delete button on the right -->
+        <button
+          mat-icon-button
+          color="warn"
+          class="delete-button"
+          (click)="deleteDraft(draft.id!); $event.stopPropagation()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+    } @else {
+    <ng-container *ngTemplateOutlet="noDrafts"></ng-container>
+    }
+
+    <ng-template #noDrafts>
+      <img src="assets/images/empty-icon.svg" class="icon-svg" />
+    </ng-template>
+
+    <button mat-flat-button color="primary" (click)="newDraft()">
+      New Draft
+    </button>
+  </mat-card-content>
 </mat-card>

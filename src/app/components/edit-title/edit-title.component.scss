@@ -1,0 +1,9 @@
+.edit-title-container {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  .button-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
