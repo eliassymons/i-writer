@@ -5,7 +5,7 @@
         @if (!titleEditOpen()) {
 
         <mat-card-title class="editor-title">{{
-          currDraft()?.title ?? "New Draft"
+          currDraft()?.title ?? draftTitle()
         }}</mat-card-title>
         <button (click)="titleEditOpen.set(true)" mat-icon-button>
           <mat-icon>edit</mat-icon>
@@ -92,7 +92,7 @@
         <img src="assets/images/message.svg" class="icon-svg" />
       </div>
 
-      } @else if(!!currentSuggestion()){
+      } @else if(!!currentSuggestion() && selectedText()){
       <p><strong>Original:</strong> {{ selectedText() }}</p>
 
       <p><strong>Suggestion:</strong> {{ currentSuggestion()?.suggestion }}</p>

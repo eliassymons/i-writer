@@ -1,0 +1,48 @@
+<mat-card class="character-list-container">
+  <mat-card-header>
+    <mat-card-title>Saved Characters</mat-card-title>
+    <button mat-flat-button color="primary" (click)="newCharacter()">
+      New Character
+    </button>
+  </mat-card-header>
+
+  <mat-card-content>
+    @if (loading()) {
+    <mat-spinner></mat-spinner>
+    } @else { @if (characters().length > 0) {
+    <mat-list>
+      @for (character of characters(); track $index) {<mat-list-item>
+        <div class="character-row" (click)="editCharacter(character?.id ?? '')">
+          <div class="character-content">
+            <img
+              class="character-image"
+              alt="character image"
+              [src]="character.imageUrl || 'assets/images/fallback.svg'"
+            />
+            <div class="character-details">
+              <div class="name">{{ character.name }}</div>
+              <div class="meta">
+                {{ character.age }} | {{ character.gender }}
+              </div>
+            </div>
+          </div>
+
+          <button
+            mat-icon-button
+            color="warn"
+            class="delete-button"
+            (click)="
+              deleteCharacter(character.id ?? ''); $event.stopPropagation()
+            "
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-list-item>
+      }
+    </mat-list>
+    } @else {
+    <p>No saved characters yet.</p>
+    } }
+  </mat-card-content>
+</mat-card>

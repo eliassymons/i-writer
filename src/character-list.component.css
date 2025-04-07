@@ -1,0 +1,62 @@
+.character-list-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+.character-list-container mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.character-list-container mat-card-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.character-list-container mat-list {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+.character-list-container mat-list-item {
+  height: 4rem;
+}
+.character-list-container mat-list-item .character-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.character-list-container mat-list-item .character-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.character-list-container mat-list-item .character-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #f0f0f0;
+}
+.character-list-container mat-list-item .character-details {
+  display: flex;
+  flex-direction: column;
+}
+.character-list-container mat-list-item .character-details .name {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.character-list-container mat-list-item .character-details .meta {
+  font-size: 0.85rem;
+  color: #777;
+}
+.character-list-container mat-list-item .delete-button {
+  flex-shrink: 0;
+}
+.character-list-container mat-list-item:hover {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}

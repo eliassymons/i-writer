@@ -8,6 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
+import { DownloadService } from '../../services/download.service';
 
 interface Draft {
   id?: string;
@@ -31,6 +32,7 @@ interface Draft {
 })
 export class DraftListComponent {
   private draftService = inject(DraftService);
+  private downloadService = inject(DownloadService);
   private router = inject(Router);
   private dialog = inject(MatDialog);
 

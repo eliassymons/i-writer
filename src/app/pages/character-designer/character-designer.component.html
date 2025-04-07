@@ -1,0 +1,100 @@
+<mat-card class="character-container" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>Character Designer</mat-card-title>
+  </mat-card-header>
+
+  <!-- ✅ Image Section -->
+  <div class="image-container">
+    <!-- Initial button -->
+    @if (!imageUrl() && !pendingImage()) {
+    <button
+      [disabled]="!characterForm.valid"
+      mat-flat-button
+      color="accent"
+      (click)="generateCharacterImage()"
+    >
+      Generate AI Image
+    </button>
+    }
+
+    <!-- Loading Spinner -->
+    @if (loadingImage()) {
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    }
+
+    <!-- ✅ Pending image: show preview with action buttons -->
+    @if (pendingImage()) {
+    <div class="character-wrapper">
+      <img [src]="pendingImage()" class="character-image" />
+      <div class="button-group">
+        <button mat-flat-button color="primary" (click)="confirmImage()">
+          Save Image
+        </button>
+        <button mat-stroked-button color="warn" (click)="cancelImage()">
+          Cancel
+        </button>
+        <button mat-button (click)="generateCharacterImage()">
+          Regenerate
+        </button>
+      </div>
+    </div>
+    }
+
+    <!-- ✅ Saved image display -->
+    @if (imageUrl() && !pendingImage()) {
+    <div class="character-wrapper">
+      <img [src]="imageUrl()" class="character-image" />
+    </div>
+    }
+  </div>
+
+  <!-- ✅ Character Form -->
+  <mat-card-content>
+    <form [formGroup]="characterForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Character Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" formControlName="age" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Physical Appearance</mat-label>
+        <textarea matInput formControlName="appearance"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Personality</mat-label>
+        <textarea matInput formControlName="personality"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Backstory</mat-label>
+        <textarea matInput formControlName="backstory"></textarea>
+      </mat-form-field>
+
+      <div class="button-group">
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="saveCharacter()"
+          [disabled]="saving()"
+        >
+          {{ saving() ? "Saving..." : "Save Character" }}
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

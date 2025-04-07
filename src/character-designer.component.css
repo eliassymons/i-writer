@@ -1,0 +1,77 @@
+.character-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.character-container mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+.character-container mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+.character-container mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.character-container mat-form-field {
+  width: 100%;
+}
+.character-container .button-group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.character-container .button-group button {
+  min-width: 120px;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.image-container button {
+  margin-bottom: 1rem;
+}
+
+.character-wrapper {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.character-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .character-container {
+    max-width: 90%;
+    padding: 1rem;
+  }
+  .character-wrapper {
+    max-width: 90%;
+    padding: 1rem;
+  }
+}

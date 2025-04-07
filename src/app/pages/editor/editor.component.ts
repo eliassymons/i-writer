@@ -77,6 +77,8 @@ export class EditorComponent {
   private draftId = this.draftService.draftId;
   public currDraft = this.draftService.currentDraft;
 
+  public draftTitle = signal<string>('Untitled Draft');
+
   public dirty = signal<boolean>(false);
   public editorDisabled = signal<boolean>(false);
   private selectedRange = signal<RangeSelection | null>(null);
@@ -129,6 +131,8 @@ export class EditorComponent {
     } else {
       this.selectedText.set(null);
       this.selectedRange.set(null);
+      this.currentSuggestion.set(null);
+      this.editorDisabled.set(false);
     }
   }
   // Send only the selected text for analysis
@@ -209,16 +213,18 @@ export class EditorComponent {
 
   saveCurrentDraft() {
     const id = this.draftId();
-    const title = this.currDraft()?.title ?? '';
+    const title = this.currDraft()?.title ?? this.draftTitle(); // Use tracked title for new drafts
     const content = this.editorContent();
 
-    if (!title) {
+    if (!title || title.trim() === '') {
       const dialogRef = this.dialog.open(TitleDialogComponent, {
-        data: { title: 'Untitled Draft' },
+        data: { title: this.draftTitle() || 'Untitled Draft' }, // Show current title or placeholder
       });
 
       dialogRef.afterClosed().subscribe((newTitle) => {
         if (newTitle) {
+          this.draftTitle.set(newTitle); // Update the title locally
+
           if (id) {
             this.draftService.updateDraft(id, newTitle, content);
           } else {
@@ -274,14 +280,16 @@ export class EditorComponent {
     });
   }
 
-  updateTitle(title: string): void {
-    this.dirty.set(true);
-    const id = this.draftId() ?? '';
-    this.draftService.editDraftTitle(id, title);
-    console.log('here');
+  updateTitle(newTitle: string): void {
+    if (this.draftId()) {
+      // If it's an existing draft, update the title
+      this.draftService.editDraftTitle(this.draftId()!, newTitle);
+    } else {
+      // If it's a new draft, just update the local title signal
+      this.draftTitle.set(newTitle);
+    }
     this.titleEditOpen.set(false);
   }
-
   exportToPDF(): void {
     this.downloadService.exportToPDF(
       this.editor()!,

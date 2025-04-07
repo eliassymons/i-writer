@@ -25,6 +25,8 @@ $quill-radius: 0.5rem;
   }
   .title-container {
     margin-bottom: 1rem;
+    margin-top: -0.5rem;
+    // max-height: 40px;
     .editor-title {
       display: flex;
       align-items: center;
@@ -51,7 +53,7 @@ $quill-radius: 0.5rem;
     margin: auto;
     gap: 1rem;
     img {
-      width: 4rem;
+      width: 3rem;
     }
   }
 
