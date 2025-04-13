@@ -43,7 +43,9 @@
       <button class="nav-btn" mat-button routerLink="/about">About</button>
 
       <mat-slide-toggle [checked]="isDarkMode" (change)="toggleDarkMode()">
-        {{ `Try ${isDarkMode ? 'Light' : 'Dark'} Mode` }}
+        <mat-icon class="mode-icon">{{
+          isDarkMode ? "dark_mode" : "light_mode"
+        }}</mat-icon>
       </mat-slide-toggle>
     </div>
   </mat-toolbar>

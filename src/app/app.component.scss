@@ -33,7 +33,11 @@
     flex: 1;
   }
 }
-
+mat-slide-toggle {
+  mat-icon {
+    display: block;
+  }
+}
 @media (max-width: 768px) {
   .main-toolbar {
     .nav-btn-wrapper {
