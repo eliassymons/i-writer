@@ -1,6 +1,6 @@
 const fs = require("fs");
 const dotenv = require("dotenv");
-
+const env = result.parsed;
 const charactersKey = process.env.CHARACTERS_KEY;
 const draftsKey = process.env.DRAFTS_KEY;
 const imageKey = process.env.OPENAI_IMAGE_KEY;
@@ -12,8 +12,6 @@ if (!charactersKey || !draftsKey || !imageKey) {
   console.error("❌ Missing one or more required environment variables.");
   process.exit(1);
 }
-
-const env = result.parsed;
 
 const targetPath = "./src/environments/environment.prod.ts";
 
