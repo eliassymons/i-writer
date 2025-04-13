@@ -3,33 +3,33 @@
     #sidenav
     class="mobile-sidenav"
     mode="over"
+    position="end"
     [opened]="false"
     role="navigation"
   >
-    <button mat-button routerLink="/editor" (click)="sidenav.close()">
-      Editor
-    </button>
-    <button mat-button routerLink="/characters" (click)="sidenav.close()">
-      Character Design
-    </button>
-    <button mat-button routerLink="/about" (click)="sidenav.close()">
-      About
-    </button>
-
-    <mat-slide-toggle [checked]="isDarkMode" (change)="toggleDarkMode()">
-      {{ `Try ${isDarkMode ? 'Light' : 'Dark'} Mode` }}
+    <mat-slide-toggle
+      class="mobile-toggle"
+      [checked]="isDarkMode"
+      (change)="toggleDarkMode()"
+    >
+      <mat-icon class="mode-icon">{{
+        isDarkMode ? "dark_mode" : "light_mode"
+      }}</mat-icon>
     </mat-slide-toggle>
+    <div class="mobile-btn-container">
+      <button mat-button routerLink="/editor" (click)="sidenav.close()">
+        Editor
+      </button>
+      <button mat-button routerLink="/characters" (click)="sidenav.close()">
+        Character Design
+      </button>
+      <button mat-button routerLink="/about" (click)="sidenav.close()">
+        About
+      </button>
+    </div>
   </mat-sidenav>
 
   <mat-toolbar class="main-toolbar" color="primary">
-    <button
-      mat-icon-button
-      class="mobile-menu-button"
-      (click)="sidenav.toggle()"
-    >
-      <mat-icon>menu</mat-icon>
-    </button>
-
     <span class="title">Draftly</span>
 
     <span class="spacer"></span>
@@ -48,6 +48,13 @@
         }}</mat-icon>
       </mat-slide-toggle>
     </div>
+    <button
+      mat-icon-button
+      class="mobile-menu-button"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
   </mat-toolbar>
 
   <div class="content-wrapper">

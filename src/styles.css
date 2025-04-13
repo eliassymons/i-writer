@@ -19,7 +19,8 @@ body.dark-mode {
   background-color: #121212;
   color: #c5c5c5;
 }
-body.dark-mode mat-sidenav-content {
+body.dark-mode mat-sidenav-content,
+body.dark-mode mat-sidenav {
   background-color: #121212;
 }
 body.dark-mode button:disabled {

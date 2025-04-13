@@ -1,11 +1,20 @@
 .sidenav-container {
   height: 100%;
+
+  .mobile-btn-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.5rem;
+  }
+  .mobile-toggle {
+    position: absolute;
+    right: 1rem;
+  }
 }
 .content-wrapper {
-  max-width: 900px;
+  max-width: 800px;
   margin: auto;
   padding: 2rem;
-  width: 100%;
 }
 .main-toolbar {
   display: flex;

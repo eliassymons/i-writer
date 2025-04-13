@@ -19,7 +19,8 @@ body {
 body.dark-mode {
   background-color: #121212;
   color: $off-white;
-  mat-sidenav-content {
+  mat-sidenav-content,
+  mat-sidenav {
     background-color: #121212;
   }
   // Disabled buttons
