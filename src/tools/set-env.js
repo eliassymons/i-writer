@@ -1,14 +1,29 @@
 const fs = require("fs");
 const dotenv = require("dotenv");
-const env = result.parsed;
-const charactersKey = process.env.CHARACTERS_KEY;
-const draftsKey = process.env.DRAFTS_KEY;
-const imageKey = process.env.OPENAI_IMAGE_KEY;
-console.log("🔍 Environment variables loaded:");
-console.log("CHARACTERS_KEY:", env.CHARACTERS_KEY ? "✅" : "❌ Missing");
-console.log("DRAFTS_KEY:", env.DRAFTS_KEY ? "✅" : "❌ Missing");
-console.log("OPENAI_IMAGE_KEY:", env.OPENAI_IMAGE_KEY ? "✅" : "❌ Missing");
-if (!charactersKey || !draftsKey || !imageKey) {
+
+const env = dotenv.config().parsed;
+
+if (!env) {
+  console.error(
+    "❌ Failed to load .env file or no environment variables found."
+  );
+  process.exit(1);
+}
+
+// ✅ Log the keys
+console.log("🔍 Environment keys loaded:");
+console.log("charactersKey:", env["CHARACTERS_KEY"] ? "✅" : "❌ Missing");
+console.log("draftsKey:", env["DRAFTS_KEY"] ? "✅" : "❌ Missing");
+console.log("images:", env["OPENAI_IMAGE_KEY"] ? "✅" : "❌ Missing");
+console.log("openAiApi:", env["OPENAI_API_KEY"] ? "✅" : "❌ Missing");
+
+// ✅ Abort if anything is missing
+if (
+  !env["CHARACTERS_KEY"] ||
+  !env["DRAFTS_KEY"] ||
+  !env["OPENAI_IMAGE_KEY"] ||
+  !env["OPENAI_API_KEY"]
+) {
   console.error("❌ Missing one or more required environment variables.");
   process.exit(1);
 }
@@ -21,13 +36,14 @@ export const environment = {
   charactersKey: '${env["CHARACTERS_KEY"]}',
   draftsKey: '${env["DRAFTS_KEY"]}',
   images: '${env["OPENAI_IMAGE_KEY"]}',
-  openAiApiKey: '${env["OPENAI_API_KEY"]}'
+  openAiApi: '${env["OPENAI_API_KEY"]}'
 };
 `;
 
 fs.writeFile(targetPath, envFileContent, (err) => {
   if (err) {
     console.error("❌ Could not write environment file:", err);
+    process.exit(1);
   } else {
     console.log("✅ Environment file generated successfully");
   }
