@@ -25,7 +25,7 @@ export const environment = {
   production: true,
   charactersKey: '${env.CHARACTERS_KEY}',
   draftsKey: '${env.DRAFTS_KEY}',
-  images: '${env.OPENAI_IMAGE_KEY}',
+  images: '${env.IMAGES}',
   openAiApiKey: '${env.OPENAI_API_KEY}'
 };
 `;
