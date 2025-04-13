@@ -11,38 +11,14 @@ export class CharacterImageService {
 
   constructor(private http: HttpClient) {}
 
-  generateImage(description: string): Observable<{ data: { url: string }[] }> {
+  public generateImage(
+    description: string
+  ): Observable<{ data: { url: string }[] }> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: `Bearer ${environment.images}`,
     });
-
-    const payload = {
-      model: 'gpt-4-1106-preview',
-      messages: [
-        {
-          role: 'system',
-          content:
-            'You are a helpful assistant that creates character illustrations.',
-        },
-        {
-          role: 'user',
-          content: `Create a profile concept art image of ${description}. The image should be just a face with no other content in the background.`,
-        },
-      ],
-      tools: [
-        {
-          type: 'image_generation',
-          tool_spec: {
-            image_model: 'dall-e-3',
-            image_size: '1024x1024',
-            image_count: 1,
-          },
-        },
-      ],
-      tool_choice: { type: 'image_generation' },
-    };
-
+    console.log(description);
     return this.http.post<{ data: { url: string }[] }>(
       'https://api.openai.com/v1/images/generations',
       {
@@ -51,7 +27,7 @@ export class CharacterImageService {
           and expressive facial features. No abstract or distorted elements.`,
         n: 1,
         size: '1024x1024',
-        model: 'dall-e-3', // ✅ Explicitly use DALL·E 3
+        model: 'dall-e-3',
       },
       { headers }
     );

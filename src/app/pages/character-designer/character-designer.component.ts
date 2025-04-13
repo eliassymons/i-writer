@@ -92,15 +92,25 @@ export class CharacterDesignerComponent {
 
       const character = {
         ...this.characterForm.value,
-        imageUrl: this.imageUrl(), // ✅ Include image if it was generated
+        imageUrl: this.imageUrl(),
       };
 
-      this.characterService.saveCharacter(character).subscribe(() => {
-        console.log('here');
-        this.saving.set(false);
-      });
+      const id = this.route.snapshot.paramMap.get('id');
+
+      if (id) {
+        // update existing
+        this.characterService.updateCharacter(id, character).subscribe(() => {
+          this.saving.set(false);
+        });
+      } else {
+        // save new char
+        this.characterService.saveCharacter(character).subscribe(() => {
+          this.saving.set(false);
+        });
+      }
     }
   }
+
   async confirmImage() {
     const url = this.pendingImage();
     if (!url) return;
@@ -118,12 +128,17 @@ export class CharacterDesignerComponent {
     this.pendingImage.set(null);
   }
   generateCharacterImage() {
-    const appearance = this.characterForm.value.appearance;
+    this.pendingImage.set(null);
+    const appearance: string = this.characterForm.value.appearance;
+    const gender = this.characterForm.value.gender;
+    const age = this.characterForm.value.age;
+
+    const fullDescription = `A ${age}-year-old ${gender} with ${appearance}.`;
     if (!appearance) return;
 
     this.loadingImage.set(true); // Show loading spinner
 
-    this.characterImageService.generateImage(appearance).subscribe({
+    this.characterImageService.generateImage(fullDescription).subscribe({
       next: (response) => {
         const url = response?.data?.[0]?.url;
         if (url) {

@@ -3,12 +3,14 @@
     <mat-card-title>Character Designer</mat-card-title>
   </mat-card-header>
 
-  <!-- ✅ Character Form -->
   <mat-card-content>
-    <!-- ✅ Image Section -->
     <div class="image-container">
-      <!-- Initial button -->
-      @if (!imageUrl() && !pendingImage() && !loadingImage()) {
+      @if (characterForm.invalid &&!imageUrl() && !pendingImage()) {
+      <p>
+        Enter your character's basic information to enable image generation.
+      </p>
+      } @if (!imageUrl() && !pendingImage() && !loadingImage() &&
+      !!characterForm.valid) {
       <button
         [disabled]="!characterForm.valid"
         mat-flat-button
@@ -90,7 +92,7 @@
           mat-flat-button
           color="primary"
           (click)="saveCharacter()"
-          [disabled]="saving()"
+          [disabled]="saving() || characterForm.invalid"
         >
           {{ saving() ? "Saving..." : "Save Character" }}
         </button>
