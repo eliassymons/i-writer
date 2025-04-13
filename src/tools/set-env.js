@@ -1,12 +1,12 @@
 const fs = require("fs");
 const dotenv = require("dotenv");
 
-const result = dotenv.config();
+const charactersKey = process.env.CHARACTERS_KEY;
+const draftsKey = process.env.DRAFTS_KEY;
+const imageKey = process.env.OPENAI_IMAGE_KEY;
 
-if (result.error || !result.parsed) {
-  console.error(
-    "❌ Failed to load .env file or no environment variables found."
-  );
+if (!charactersKey || !draftsKey || !imageKey) {
+  console.error("❌ Missing one or more required environment variables.");
   process.exit(1);
 }
 
