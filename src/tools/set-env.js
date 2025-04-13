@@ -18,7 +18,12 @@ if (
   process.exit(1);
 }
 
-const targetPath = "./src/environments/environment.prod.ts";
+const envDir = "./src/environments";
+if (!fs.existsSync(envDir)) {
+  fs.mkdirSync(envDir, { recursive: true });
+}
+
+const targetPath = path.join(envDir, "environment.prod.ts");
 
 const envFileContent = `
 export const environment = {
