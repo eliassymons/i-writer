@@ -23,7 +23,10 @@ export const environment = {
   openAiApiKey: '${env["OPENAI_API_KEY"]}'
 };
 `;
-
+console.log("🔍 Environment variables loaded:");
+console.log("CHARACTERS_KEY:", env.CHARACTERS_KEY ? "✅" : "❌ Missing");
+console.log("DRAFTS_KEY:", env.DRAFTS_KEY ? "✅" : "❌ Missing");
+console.log("OPENAI_IMAGE_KEY:", env.OPENAI_IMAGE_KEY ? "✅" : "❌ Missing");
 fs.writeFile(targetPath, envFileContent, (err) => {
   if (err) {
     console.error("❌ Could not write environment file:", err);
