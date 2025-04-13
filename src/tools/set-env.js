@@ -5,13 +5,13 @@ const env = process.env;
 console.log("🔍 Environment keys loaded:");
 console.log("charactersKey:", env.CHARACTERS_KEY ? "✅" : "❌ Missing");
 console.log("draftsKey:", env.DRAFTS_KEY ? "✅" : "❌ Missing");
-console.log("images:", env.OPENAI_IMAGE_KEY ? "✅" : "❌ Missing");
+console.log("images:", env.IMAGES ? "✅" : "❌ Missing");
 console.log("openAiApi:", env.OPENAI_API_KEY ? "✅" : "❌ Missing");
 
 if (
   !env.CHARACTERS_KEY ||
   !env.DRAFTS_KEY ||
-  !env.OPENAI_IMAGE_KEY ||
+  !env.IMAGES ||
   !env.OPENAI_API_KEY
 ) {
   console.error("❌ Missing one or more required environment variables.");
