@@ -1,27 +1,57 @@
-.container {
-  padding: 20px;
+.sidenav-container {
+  height: 100%;
+}
+.content-wrapper {
   max-width: 900px;
   margin: auto;
+  padding: 2rem;
+  width: 100%;
 }
-
-mat-toolbar {
+.main-toolbar {
   display: flex;
-  justify-content: center;
-  .toolbar-content {
-    display: flex;
-    width: 100%;
-    max-width: 900px;
-    justify-content: space-between;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+
+  .mobile-menu-button {
+    display: none;
   }
-  .title-btn {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-      sans-serif;
+
+  .title {
+    font-family: "Gill Sans", sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
   }
+
   .nav-btn-wrapper {
     display: flex;
     gap: 1rem;
     align-items: center;
+  }
+
+  .spacer {
+    flex: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-toolbar {
+    .nav-btn-wrapper {
+      display: none;
+    }
+
+    .mobile-menu-button {
+      display: inline-flex;
+    }
+  }
+
+  .content-wrapper {
+    padding: 1rem;
+  }
+  .mobile-sidenav {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
   }
 }

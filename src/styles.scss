@@ -19,35 +19,76 @@ body {
 body.dark-mode {
   background-color: #121212;
   color: $off-white;
+  mat-sidenav-content {
+    background-color: #121212;
+  }
+  // Disabled buttons
+  button:disabled {
+    color: rgba(255, 255, 255, 0.3) !important;
+  }
 
+  // Outlined buttons
+  button.mdc-button--outlined {
+    color: $off-white;
+    background-color: #444;
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  // Icon buttons
+  .mdc-icon-button {
+    color: $off-white;
+  }
+
+  // Inputs
+  input,
+  textarea,
+  .mat-mdc-input-element {
+    color: $off-white !important;
+    background-color: transparent;
+  }
+
+  label,
+  .mat-mdc-form-field-label {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  // Toolbar
   mat-toolbar {
     background: #1e1e1e !important;
     color: $off-white;
+
     .nav-btn {
-      background-color: $off-white;
+      background-color: transparent;
+      color: $off-white;
     }
+
     .title-btn {
       color: $off-white !important;
     }
   }
+
+  // Cards
   mat-card {
     background: #1e1e1e;
     color: $off-white;
+
     .hint {
       color: $off-white !important;
       background-color: transparent !important;
     }
   }
+
+  // List Items
   mat-list-item {
-    background-color: transparent; // default background
+    background-color: transparent;
     color: $off-white;
 
     &:hover {
-      background-color: rgba(255, 255, 255, 0.08); // subtle hover
+      background-color: rgba(255, 255, 255, 0.08);
     }
 
     &:active {
-      background-color: rgba(255, 255, 255, 0.12); // click effect
+      background-color: rgba(255, 255, 255, 0.12);
     }
 
     .title,
@@ -59,17 +100,30 @@ body.dark-mode {
     }
 
     .delete-button mat-icon {
-      color: lighten($off-white, 10%); // slightly brighter for visibility
+      color: lighten($off-white, 10%);
     }
   }
 
-  // Optional: style the fallback image background too
+  // Fallback character image
   .character-image {
-    background-color: #444; // darker fallback color
+    background-color: #444;
   }
+
+  // Quill editor
   .ql-container {
     background: #333;
     color: $off-white;
+  }
+
+  // Mat slide toggle track and thumb
+  .mat-mdc-slide-toggle {
+    .mdc-switch__track {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .mdc-switch__thumb {
+      background-color: $off-white;
+    }
   }
 }
 

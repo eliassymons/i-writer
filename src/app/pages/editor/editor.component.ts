@@ -186,9 +186,9 @@ export class EditorComponent {
 
     // Replace the selected text with the AI suggestion
     quill.deleteText(start, length);
-    quill.insertText(start, replacement.suggestion, {
-      background: 'lightgreen',
-    });
+    quill.insertText(start, replacement.suggestion);
+    // Move cursor to the end of the inserted suggestion
+    quill.setSelection(start + replacement.suggestion.length, 0);
 
     // Remove green highlight after 2 seconds
     setTimeout(() => {

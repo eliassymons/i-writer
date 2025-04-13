@@ -23,6 +23,20 @@
     flex-direction: column;
     gap: 1rem; // Adds spacing between form fields
   }
+  .form-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    // flex-wrap: wrap; // Helps with responsive stacking
+
+    .character-field {
+      flex: 1 1 40%; // 40% of the container, flexible
+    }
+
+    mat-form-field {
+      flex: 1 1 30%;
+      min-width: 100px; // Prevents from collapsing too small
+    }
+  }
 
   mat-form-field {
     width: 100%;
@@ -59,6 +73,7 @@
   padding: 1rem;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }

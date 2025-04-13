@@ -27,7 +27,7 @@ export class CharacterImageService {
         },
         {
           role: 'user',
-          content: `Create a full-body concept art image of ${description}.`,
+          content: `Create a profile concept art image of ${description}. The image should be just a face with no other content in the background.`,
         },
       ],
       tools: [

@@ -1,21 +1,54 @@
-<mat-toolbar>
-  <div class="toolbar-content">
-    <button class="title-btn" mat-button routerLink="/">Draftly</button>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #sidenav
+    class="mobile-sidenav"
+    mode="over"
+    [opened]="false"
+    role="navigation"
+  >
+    <button mat-button routerLink="/editor" (click)="sidenav.close()">
+      Editor
+    </button>
+    <button mat-button routerLink="/characters" (click)="sidenav.close()">
+      Character Design
+    </button>
+    <button mat-button routerLink="/about" (click)="sidenav.close()">
+      About
+    </button>
+
+    <mat-slide-toggle [checked]="isDarkMode" (change)="toggleDarkMode()">
+      {{ `Try ${isDarkMode ? 'Light' : 'Dark'} Mode` }}
+    </mat-slide-toggle>
+  </mat-sidenav>
+
+  <mat-toolbar class="main-toolbar" color="primary">
+    <button
+      mat-icon-button
+      class="mobile-menu-button"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="title">Draftly</span>
+
+    <span class="spacer"></span>
+
+    <!-- Desktop nav -->
     <div class="nav-btn-wrapper">
       <button class="nav-btn" mat-button routerLink="/editor">Editor</button>
       <button class="nav-btn" mat-button routerLink="/characters">
         Character Design
       </button>
       <button class="nav-btn" mat-button routerLink="/about">About</button>
-      <button class="nav-btn" mat-button routerLink="/settings">
-        Settings
-      </button>
 
-      <mat-slide-toggle (change)="toggleDarkMode()">Dark Mode</mat-slide-toggle>
+      <mat-slide-toggle [checked]="isDarkMode" (change)="toggleDarkMode()">
+        {{ `Try ${isDarkMode ? 'Light' : 'Dark'} Mode` }}
+      </mat-slide-toggle>
     </div>
-  </div>
-</mat-toolbar>
+  </mat-toolbar>
 
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+  <div class="content-wrapper">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
