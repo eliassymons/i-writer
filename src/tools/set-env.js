@@ -1,7 +1,7 @@
 const fs = require("fs");
+const path = require("path");
 
 const env = process.env;
-const path = require("path");
 
 console.log("🔍 Environment keys loaded:");
 console.log("charactersKey:", env.CHARACTERS_KEY ? "✅" : "❌ Missing");
@@ -24,9 +24,7 @@ if (!fs.existsSync(envDir)) {
   fs.mkdirSync(envDir, { recursive: true });
 }
 
-const targetPath = path.join(envDir, "environment.prod.ts");
-
-const envFileContent = `
+const sharedContent = `
 export const environment = {
   production: true,
   charactersKey: '${env.CHARACTERS_KEY}',
@@ -36,11 +34,11 @@ export const environment = {
 };
 `;
 
-fs.writeFile(targetPath, envFileContent, (err) => {
-  if (err) {
-    console.error("❌ Could not write environment file:", err);
-    process.exit(1);
-  } else {
-    console.log("✅ Environment file generated successfully");
-  }
-});
+const prodPath = path.join(envDir, "environment.prod.ts");
+const basePath = path.join(envDir, "environment.ts");
+
+// Write both files
+fs.writeFileSync(prodPath, sharedContent);
+fs.writeFileSync(basePath, sharedContent);
+
+console.log("✅ Environment files generated successfully");
