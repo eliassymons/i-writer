@@ -8,7 +8,7 @@ import { CharacterListComponent } from './pages/character-list/character-list.co
 
 export const routes: Routes = [
   { path: '', component: DraftListComponent }, // Default page (Draft List)
-  { path: 'editor', component: EditorComponent }, // New draft
+  { path: 'editor', component: DraftListComponent }, // New draft
   { path: 'editor/:id', component: EditorComponent }, // Edit existing draft
   { path: 'about', component: AboutComponent },
   { path: 'settings', component: SettingsComponent },

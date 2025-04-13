@@ -54,7 +54,7 @@ export class DraftListComponent {
 
   // Start a new draft
   newDraft() {
-    this.router.navigate(['/editor']);
+    this.router.navigate(['/editor/new']);
   }
 
   // Delete a draft

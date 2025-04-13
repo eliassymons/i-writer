@@ -26,12 +26,47 @@ body.dark-mode {
     .nav-btn {
       background-color: $off-white;
     }
+    .title-btn {
+      color: $off-white !important;
+    }
   }
   mat-card {
     background: #1e1e1e;
     color: $off-white;
+    .hint {
+      color: $off-white !important;
+      background-color: transparent !important;
+    }
+  }
+  mat-list-item {
+    background-color: transparent; // default background
+    color: $off-white;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08); // subtle hover
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.12); // click effect
+    }
+
+    .title,
+    .date,
+    .character-name,
+    .meta,
+    .name {
+      color: $off-white;
+    }
+
+    .delete-button mat-icon {
+      color: lighten($off-white, 10%); // slightly brighter for visibility
+    }
   }
 
+  // Optional: style the fallback image background too
+  .character-image {
+    background-color: #444; // darker fallback color
+  }
   .ql-container {
     background: #333;
     color: $off-white;

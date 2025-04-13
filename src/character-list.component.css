@@ -1,32 +1,21 @@
-.character-list-container {
-  max-width: 700px;
-  margin: auto;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
-}
-.character-list-container mat-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
 .character-list-container mat-card-title {
-  font-size: 1.6rem;
-  font-weight: 600;
-}
-.character-list-container mat-list {
-  width: 100%;
-  margin-top: 0.5rem;
+  font-weight: 500;
 }
 .character-list-container mat-list-item {
   height: 4rem;
-}
-.character-list-container mat-list-item .character-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease-in-out;
+  border-radius: 4px;
+  position: relative;
+}
+.character-list-container mat-list-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.character-list-container mat-list-item:active {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .character-list-container mat-list-item .character-content {
   display: flex;
@@ -44,19 +33,45 @@
 .character-list-container mat-list-item .character-details {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
-.character-list-container mat-list-item .character-details .name {
+.character-list-container mat-list-item .character-details .title {
+  font-weight: 500;
   font-size: 1rem;
-  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .character-list-container mat-list-item .character-details .meta {
-  font-size: 0.85rem;
+  font-size: 12px;
   color: #777;
 }
 .character-list-container mat-list-item .delete-button {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
   flex-shrink: 0;
+  margin-left: 10px;
 }
-.character-list-container mat-list-item:hover {
-  background-color: #f9f9f9;
-  border-radius: 8px;
+.character-list-container .new-char-btn {
+  display: flex;
+  margin-left: auto;
+}
+.character-list-container .empty-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.character-list-container .empty-box mat-icon {
+  color: var(--grey-text);
+  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+}
+.character-list-container .empty-box .subtitle {
+  display: flex;
+  color: var(--grey-text);
+  align-items: center;
 }

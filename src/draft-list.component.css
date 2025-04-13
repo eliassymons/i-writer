@@ -25,6 +25,10 @@
 .draft-list-container .date {
   font-size: 12px;
 }
+.draft-list-container .new-draft-btn {
+  display: flex;
+  margin-left: auto;
+}
 .draft-list-container .delete-button {
   position: absolute;
   right: 1rem;

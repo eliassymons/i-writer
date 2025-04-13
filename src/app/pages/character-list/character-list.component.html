@@ -1,9 +1,6 @@
-<mat-card class="character-list-container">
+<mat-card class="character-list-container" appearance="outlined">
   <mat-card-header>
     <mat-card-title>Saved Characters</mat-card-title>
-    <button mat-flat-button color="primary" (click)="newCharacter()">
-      New Character
-    </button>
   </mat-card-header>
 
   <mat-card-content>
@@ -11,38 +8,53 @@
     <mat-spinner></mat-spinner>
     } @else { @if (characters().length > 0) {
     <mat-list>
-      @for (character of characters(); track $index) {<mat-list-item>
-        <div class="character-row" (click)="editCharacter(character?.id ?? '')">
-          <div class="character-content">
-            <img
-              class="character-image"
-              alt="character image"
-              [src]="character.imageUrl || 'assets/images/fallback.svg'"
-            />
-            <div class="character-details">
-              <div class="name">{{ character.name }}</div>
-              <div class="meta">
-                {{ character.age }} | {{ character.gender }}
-              </div>
-            </div>
+      <mat-list-item
+        *ngFor="let character of characters(); let i = index"
+        class="clickable"
+        (click)="editCharacter(character.id!)"
+      >
+        <div class="character-content" matRipple>
+          <img
+            class="character-image"
+            alt="character image"
+            [src]="character.imageUrl || 'assets/images/fallback.svg'"
+          />
+          <div class="character-details">
+            <span class="title">{{ character.name }}</span>
+            <span class="meta"
+              >{{ character.age }} | {{ character.gender }}</span
+            >
           </div>
-
-          <button
-            mat-icon-button
-            color="warn"
-            class="delete-button"
-            (click)="
-              deleteCharacter(character.id ?? ''); $event.stopPropagation()
-            "
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
         </div>
+
+        <button
+          mat-icon-button
+          color="warn"
+          class="delete-button"
+          (click)="deleteCharacter(character.id!); $event.stopPropagation()"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
       </mat-list-item>
-      }
     </mat-list>
     } @else {
-    <p>No saved characters yet.</p>
+    <div class="empty-box">
+      <div class="subtitle">
+        <p>No characters saved yet.</p>
+        <mat-icon>person_off</mat-icon>
+      </div>
+      <img src="assets/images/empty-icon.svg" class="icon-svg" />
+    </div>
     } }
+
+    <button
+      mat-fab
+      extended
+      color="accent"
+      class="new-char-btn"
+      (click)="newCharacter()"
+    >
+      New Character<mat-icon>add</mat-icon>
+    </button>
   </mat-card-content>
 </mat-card>

@@ -18,6 +18,7 @@ import { CharacterService } from '../../services/character.service';
 import { CharacterImageService } from '../../services/character-image.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { image } from 'html2canvas/dist/types/css/types/image';
+import { ImageUploadService } from '../../services/image-upload.service';
 
 @Component({
   selector: 'app-character-designer',
@@ -41,6 +42,7 @@ export class CharacterDesignerComponent {
   private route = inject(ActivatedRoute);
   private characterService = inject(CharacterService);
   private characterImageService = inject(CharacterImageService);
+  private imageUploadService = inject(ImageUploadService);
 
   imageUrl = signal<string | null>(null);
   loadingImage = signal<boolean>(false);
@@ -99,9 +101,17 @@ export class CharacterDesignerComponent {
       });
     }
   }
-  confirmImage() {
-    this.imageUrl.set(this.pendingImage());
-    this.pendingImage.set(null);
+  async confirmImage() {
+    const url = this.pendingImage();
+    if (!url) return;
+
+    try {
+      const uploadedUrl = await this.imageUploadService.uploadImageFromUrl(url);
+      this.imageUrl.set(uploadedUrl);
+      this.pendingImage.set(null);
+    } catch (err) {
+      console.error('Error uploading image to Cloudinary:', err);
+    }
   }
 
   cancelImage() {

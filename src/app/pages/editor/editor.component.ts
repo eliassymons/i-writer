@@ -100,13 +100,14 @@ export class EditorComponent {
   constructor() {
     this.loadDrafts();
     this.route.paramMap.subscribe((params) => {
-      this.draftId.set(params.get('id'));
-      const validId = this.draftId();
-      if (validId) this.loadDraft(validId);
-    });
+      const id = params.get('id');
 
-    effect(() => {
-      console.log(this.editor());
+      if (id === 'new') {
+        this.draftId.set(null); // ← this means "we're making a new draft"
+      } else {
+        this.draftId.set(id);
+        id && this.loadDraft(id);
+      }
     });
   }
 
@@ -224,7 +225,7 @@ export class EditorComponent {
       dialogRef.afterClosed().subscribe((newTitle) => {
         if (newTitle) {
           this.draftTitle.set(newTitle); // Update the title locally
-
+          console.log(id);
           if (id) {
             this.draftService.updateDraft(id, newTitle, content);
           } else {
@@ -248,14 +249,16 @@ export class EditorComponent {
   // Load a Specific Draft
   // Load a draft if editing an existing one
   public loadDraft(draftId: string) {
-    this.draftService.getDraftById(draftId).subscribe({
-      next: (draft) => {
-        this.editorContent.set(draft.content);
-        const quill = this.editor()?.quillEditor;
-        if (quill) quill.root.innerHTML = draft.content;
-      },
-      error: (error) => console.error('Error loading draft:', error),
-    });
+    if (draftId !== 'new') {
+      this.draftService.getDraftById(draftId).subscribe({
+        next: (draft) => {
+          this.editorContent.set(draft.content);
+          const quill = this.editor()?.quillEditor;
+          if (quill) quill.root.innerHTML = draft.content;
+        },
+        error: (error) => console.error('Error loading draft:', error),
+      });
+    }
   }
 
   // Navigate back to draft selection
