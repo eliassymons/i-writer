@@ -1,6 +1,7 @@
 const fs = require("fs");
 
 const env = process.env;
+const path = require("path");
 
 console.log("🔍 Environment keys loaded:");
 console.log("charactersKey:", env.CHARACTERS_KEY ? "✅" : "❌ Missing");
