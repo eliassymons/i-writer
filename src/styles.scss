@@ -28,6 +28,10 @@ body.dark-mode {
     color: rgba(255, 255, 255, 0.3) !important;
   }
 
+  .mobile-btn-container button {
+    color: $off-white;
+  }
+
   // Outlined buttons
   button.mdc-button--outlined {
     color: $off-white;

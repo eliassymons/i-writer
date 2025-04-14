@@ -26,6 +26,9 @@ body.dark-mode mat-sidenav {
 body.dark-mode button:disabled {
   color: rgba(255, 255, 255, 0.3) !important;
 }
+body.dark-mode .mobile-btn-container button {
+  color: #c5c5c5;
+}
 body.dark-mode button.mdc-button--outlined {
   color: #c5c5c5;
   background-color: #444;

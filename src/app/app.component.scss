@@ -1,10 +1,12 @@
 .sidenav-container {
   height: 100%;
-
+  button {
+    font-size: 1rem;
+  }
   .mobile-btn-container {
     display: flex;
     flex-direction: column;
-    margin-top: 2.5rem;
+    margin-top: 3rem;
   }
   .mobile-toggle {
     position: absolute;
