@@ -1,7 +1,7 @@
 <mat-card class="editor-container" appearance="outlined">
   <div class="editor">
     <mat-card-header class="title-container">
-      <div class="editor-title">
+      <div class="editor-title" [ngClass]="{ fullWidth: titleEditOpen() }">
         @if (!titleEditOpen()) {
 
         <mat-card-title class="editor-title">{{
@@ -20,14 +20,15 @@
 
         }
       </div>
+      @if (!titleEditOpen()) {
       <div class="button-group">
         <button
           [disabled]="!editorContent()"
-          mat-stroked-button
-          color="primary"
+          mat-fab
+          extended
           (click)="exportToPDF()"
         >
-          Download PDF
+          <mat-icon>download</mat-icon>PDF
         </button>
         <button
           class="back-btn"
@@ -36,9 +37,10 @@
           color="accent"
           (click)="backToDrafts()"
         >
-          <mat-icon>arrow_back</mat-icon> Back to Drafts
+          <mat-icon>arrow_back</mat-icon>Back
         </button>
       </div>
+      }
     </mat-card-header>
 
     <mat-card-content>

@@ -24,6 +24,9 @@ $quill-radius: 0.5rem;
     }
   }
   .title-container {
+    app-edit-title {
+      width: 100%;
+    }
     margin-bottom: 1rem;
     margin-top: -0.5rem;
     // max-height: 40px;
@@ -32,6 +35,9 @@ $quill-radius: 0.5rem;
       align-items: center;
       gap: 1rem;
       font-weight: 500;
+      .fullWidth {
+        width: 100%;
+      }
     }
     .button-group {
       margin-left: auto;
@@ -45,6 +51,7 @@ $quill-radius: 0.5rem;
   }
   flex: 1;
   .hint {
+    padding-inline: 0.5rem;
     background-color: #d7e3ff;
     border-radius: 0.5rem;
     display: flex;

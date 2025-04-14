@@ -18,3 +18,13 @@
     @include mat.form-field-density(-5);
   }
 }
+
+@media (max-width: 768px) {
+  .edit-title-container {
+    width: 100%;
+    flex-direction: column;
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}

@@ -23,11 +23,17 @@
   margin-bottom: 1rem;
   margin-top: -0.5rem;
 }
+.editor .title-container app-edit-title {
+  width: 100%;
+}
 .editor .title-container .editor-title {
   display: flex;
   align-items: center;
   gap: 1rem;
   font-weight: 500;
+}
+.editor .title-container .editor-title .fullWidth {
+  width: 100%;
 }
 .editor .title-container .button-group {
   margin-left: auto;
@@ -40,6 +46,7 @@
   padding-top: 0;
 }
 .suggestions-sidebar .hint {
+  padding-inline: 0.5rem;
   background-color: #d7e3ff;
   border-radius: 0.5rem;
   display: flex;
