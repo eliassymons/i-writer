@@ -4,7 +4,9 @@
   </mat-card-header>
 
   <mat-card-content>
-    @if (!!drafts().length) {
+    @if (draftsLoading()) {
+    <mat-spinner></mat-spinner>
+    } @else if (!!drafts().length) {
     <mat-list>
       <mat-list-item
         *ngFor="let draft of drafts(); let i = index"

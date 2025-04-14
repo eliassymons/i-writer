@@ -8,7 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatIconModule } from '@angular/material/icon';
-import { DownloadService } from '../../services/download.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 interface Draft {
   id?: string;
@@ -26,17 +26,19 @@ interface Draft {
     MatCardModule,
     MatListModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './draft-list.component.html',
   styleUrls: ['./draft-list.component.scss'],
 })
 export class DraftListComponent {
   private draftService = inject(DraftService);
-  private downloadService = inject(DownloadService);
+
   private router = inject(Router);
   private dialog = inject(MatDialog);
 
   public drafts = this.draftService.drafts;
+  public draftsLoading = this.draftService.draftsLoading;
 
   constructor() {
     this.loadDrafts();

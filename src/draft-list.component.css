@@ -1,6 +1,9 @@
 .draft-list-container mat-card-title {
   font-weight: 500;
 }
+.draft-list-container mat-spinner {
+  margin: auto;
+}
 .draft-list-container mat-list-item {
   display: flex;
   align-items: center;

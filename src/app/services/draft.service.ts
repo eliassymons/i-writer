@@ -16,6 +16,7 @@ interface Draft {
 export class DraftService {
   private API_URL = environment.draftsKey; // Replace with your MockAPI URL
   public drafts = signal<Draft[]>([]);
+  public draftsLoading = signal<boolean>(false);
   public draftId = signal<string | null>(null);
   public currentDraft = computed(() => {
     return this.drafts().find((d) => d.id === this.draftId());
@@ -63,9 +64,16 @@ export class DraftService {
 
   // Get all drafts
   getDrafts(): void {
+    this.draftsLoading.set(true);
     this.http.get<Draft[]>(this.API_URL).subscribe({
-      next: (loadedDrafts) => this.drafts.set(loadedDrafts),
-      error: (error) => console.error('Error loading drafts:', error),
+      next: (loadedDrafts) => {
+        this.draftsLoading.set(false);
+        return this.drafts.set(loadedDrafts);
+      },
+      error: (error) => {
+        this.draftsLoading.set(false);
+        console.error('Error loading drafts:', error);
+      },
     });
   }
 

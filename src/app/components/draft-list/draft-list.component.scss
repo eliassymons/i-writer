@@ -2,6 +2,10 @@
   mat-card-title {
     font-weight: 500;
   }
+
+  mat-spinner {
+    margin: auto;
+  }
   mat-list-item {
     display: flex; // Ensures horizontal layout
     align-items: center; // Centers items vertically
