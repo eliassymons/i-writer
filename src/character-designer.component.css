@@ -7,6 +7,9 @@
 .character-container mat-card-title {
   font-weight: 500;
 }
+.character-container mat-progress-spinner {
+  margin-top: 1rem;
+}
 .character-container mat-card-content {
   display: flex;
   flex-direction: column;
@@ -14,6 +17,7 @@
 }
 .character-container .image-hint {
   padding-inline: 1rem;
+  font-size: 0.8rem;
 }
 .character-container form {
   padding: 1rem;

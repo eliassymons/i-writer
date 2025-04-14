@@ -16,6 +16,13 @@
         isDarkMode ? "dark_mode" : "light_mode"
       }}</mat-icon>
     </mat-slide-toggle>
+    <button
+      mat-icon-button
+      class="close-menu-button"
+      (click)="sidenav.toggle()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
     <div class="mobile-btn-container">
       <button mat-button routerLink="/editor" (click)="sidenav.close()">
         Editor
@@ -30,7 +37,7 @@
   </mat-sidenav>
 
   <mat-toolbar class="main-toolbar" color="primary">
-    <span class="title">Draftly</span>
+    <button mat-button routerLink="/" class="title no-styles">DRAFTLY</button>
 
     <span class="spacer"></span>
 

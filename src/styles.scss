@@ -33,6 +33,10 @@ body.dark-mode {
     color: $off-white;
   }
 
+  mat-select {
+    color: $off-white;
+  }
+
   // Outlined buttons
   button.mdc-button--outlined {
     color: $off-white;
@@ -68,7 +72,7 @@ body.dark-mode {
       color: $off-white;
     }
 
-    .title-btn {
+    .title {
       color: $off-white !important;
     }
   }

@@ -1,6 +1,9 @@
 .sidenav-container {
   height: 100%;
 }
+.sidenav-container .no-styles {
+  background: none;
+}
 .sidenav-container button {
   font-size: 1rem;
 }
@@ -11,7 +14,13 @@
 }
 .sidenav-container .mobile-toggle {
   position: absolute;
+  left: 1rem;
+}
+.sidenav-container .close-menu-button {
+  display: block;
+  position: absolute;
   right: 1rem;
+  top: 0.5rem;
 }
 
 .content-wrapper {
@@ -30,9 +39,8 @@
   display: none;
 }
 .main-toolbar .title {
-  font-family: "Gill Sans", sans-serif;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 500;
 }
 .main-toolbar .nav-btn-wrapper {
   display: flex;

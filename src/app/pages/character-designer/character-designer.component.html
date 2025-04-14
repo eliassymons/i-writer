@@ -24,6 +24,7 @@
       <!-- Loading Spinner -->
       @if (loadingImage()) {
       <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      <p class="image-hint">Hang tight while your image renders!</p>
       }
 
       <!-- Pending image: show preview with action buttons -->
@@ -56,6 +57,7 @@
       </div>
       }
     </div>
+    @if (!loadingImage() && !pendingImage()) {
     <form [formGroup]="characterForm">
       <div class="form-wrapper">
         <mat-form-field appearance="outline" class="full-width character-field">
@@ -103,5 +105,6 @@
         </button>
       </div>
     </form>
+    }
   </mat-card-content>
 </mat-card>

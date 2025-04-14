@@ -1,4 +1,7 @@
 .sidenav-container {
+  .no-styles {
+    background: none;
+  }
   height: 100%;
   button {
     font-size: 1rem;
@@ -6,11 +9,18 @@
   .mobile-btn-container {
     display: flex;
     flex-direction: column;
+
     margin-top: 3rem;
   }
   .mobile-toggle {
     position: absolute;
+    left: 1rem;
+  }
+  .close-menu-button {
+    display: block;
+    position: absolute;
     right: 1rem;
+    top: 0.5rem;
   }
 }
 .content-wrapper {
@@ -29,9 +39,8 @@
   }
 
   .title {
-    font-family: "Gill Sans", sans-serif;
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 500;
   }
 
   .nav-btn-wrapper {
