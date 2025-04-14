@@ -26,6 +26,7 @@ body.dark-mode {
   // Disabled buttons
   button:disabled {
     color: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(243, 243, 243, 0.3);
   }
 
   .mobile-btn-container button {

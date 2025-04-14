@@ -6,7 +6,7 @@
   <mat-card-content>
     <div class="image-container">
       @if (characterForm.invalid &&!imageUrl() && !pendingImage()) {
-      <p>
+      <p class="image-hint">
         Enter your character's basic information to enable image generation.
       </p>
       } @if (!imageUrl() && !pendingImage() && !loadingImage() &&
@@ -26,25 +26,30 @@
       <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
       }
 
-      <!-- ✅ Pending image: show preview with action buttons -->
+      <!-- Pending image: show preview with action buttons -->
       @if (pendingImage()) {
       <div class="character-wrapper">
         <img [src]="pendingImage()" class="character-image" />
         <div class="button-group">
-          <button mat-flat-button color="primary" (click)="confirmImage()">
-            Save Image
+          <button
+            mat-flat-button
+            color="primary"
+            class="save-btn"
+            (click)="confirmImage()"
+          >
+            Save
           </button>
           <button mat-stroked-button color="warn" (click)="cancelImage()">
             Cancel
           </button>
-          <button mat-button (click)="generateCharacterImage()">
+          <button mat-flat-button (click)="generateCharacterImage()">
             Regenerate
           </button>
         </div>
       </div>
       }
 
-      <!-- ✅ Saved image display -->
+      <!--  Saved image display -->
       @if (imageUrl() && !pendingImage()) {
       <div class="character-wrapper">
         <img [src]="imageUrl()" class="character-image" />
