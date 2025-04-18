@@ -20,15 +20,4 @@ Live Site → [https://www.draftly.dev](https://www.draftly.dev)
 - 🌗 **Dark Mode**  
   Easily switch between light and dark themes with persistent settings.
 
----
 
-## 🛠️ Getting Started
-
-### Development Server
-
-Start the app locally:
-
-```bash
-npm install
-ng serve
-```
