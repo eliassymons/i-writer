@@ -225,7 +225,7 @@ export class EditorComponent {
       dialogRef.afterClosed().subscribe((newTitle) => {
         if (newTitle) {
           this.draftTitle.set(newTitle); // Update the title locally
-          console.log(id);
+
           if (id) {
             this.draftService.updateDraft(id, newTitle, content);
           } else {

@@ -90,7 +90,6 @@ export class DraftService {
   }
 
   editDraftTitle(id: string, title: string): void {
-    console.log(title);
     const draftToUpdate = this.drafts().find((draft) => draft.id === id);
     if (!draftToUpdate) {
       console.error(`Draft with ID ${id} not found.`);
@@ -106,7 +105,6 @@ export class DraftService {
         this.drafts.update((drafts) =>
           drafts.map((draft) => (draft.id === id ? updatedDraftFromAPI : draft))
         );
-        console.log(`Draft ${id} updated successfully:`, updatedDraftFromAPI);
       },
       error: (error) => console.error('Error updating draft title:', error),
     });

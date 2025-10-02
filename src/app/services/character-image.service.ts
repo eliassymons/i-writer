@@ -18,7 +18,7 @@ export class CharacterImageService {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${environment.images}`,
     });
-    console.log(description);
+
     return this.http.post<{ data: { url: string }[] }>(
       'https://api.openai.com/v1/images/generations',
       {

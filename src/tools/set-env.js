@@ -3,12 +3,6 @@ const path = require("path");
 
 const env = process.env;
 
-console.log("🔍 Environment keys loaded:");
-console.log("charactersKey:", env.CHARACTERS_KEY ? "✅" : "❌ Missing");
-console.log("draftsKey:", env.DRAFTS_KEY ? "✅" : "❌ Missing");
-console.log("images:", env.IMAGES ? "✅" : "❌ Missing");
-console.log("openAiApi:", env.OPENAI_API_KEY ? "✅" : "❌ Missing");
-
 if (
   !env.CHARACTERS_KEY ||
   !env.DRAFTS_KEY ||
@@ -40,5 +34,3 @@ const basePath = path.join(envDir, "environment.ts");
 // Write both files
 fs.writeFileSync(prodPath, sharedContent);
 fs.writeFileSync(basePath, sharedContent);
-
-console.log("✅ Environment files generated successfully");
